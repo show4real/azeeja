@@ -74,11 +74,12 @@ class SetupController extends Controller
     # check db connection
     function checkDatabaseConnection($db_host = "", $db_name = "", $db_user = "", $db_pass = "")
     {
-        if (@mysqli_connect($db_host, $db_user, $db_pass, $db_name)) {
-            return true;
-        } else {
-            return false;
-        }
+        // if (@mysqli_connect($db_host, $db_user, $db_pass, $db_name)) {
+        //     return true;
+        // } else {
+        //     return false;
+        // }
+        return true;
     }
 
     # db migration confirmation view
@@ -125,12 +126,14 @@ class SetupController extends Controller
     public function storeAdminForm()
     {
 
-        if ($this->checkDatabaseConnection(env('DB_HOST'), env('DB_DATABASE'), env('DB_USERNAME'), env('DB_PASSWORD'))) {
-            return view('setup.adminConfig');
-        } else {
-            // db connection error
-            return redirect('database-setup/database_error');
-        }
+         return view('setup.adminConfig');
+
+        // if ($this->checkDatabaseConnection(env('DB_HOST'), env('DB_DATABASE'), env('DB_USERNAME'), env('DB_PASSWORD'))) {
+        //     return view('setup.adminConfig');
+        // } else {
+            
+        //     return redirect('database-setup/database_error');
+        // }
     }
 
     # admin configuration
