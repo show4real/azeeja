@@ -57,13 +57,20 @@
 
             </div>
         @else
+            
+           @if (!empty($product->variations) && count($product->variations) > 0)
             <form action="" class="direct-add-to-cart-form">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="hidden" name="product_variation_id" value="{{ $product->variations[0]->id }}">
+                @if (!empty($product->variations[0]))
+                    <input type="hidden" name="product_variation_id" value="{{ $product->variations[0]->id }}">
+                @endif
                 <input type="hidden" value="1" name="quantity">
 
                 <div class="d-flex justify-content-between align-items-center mt-10">
                     <span class="flex-grow-1">
+                        @php
+                            $stock = !empty($product->variations[0]->product_variation_stock) ? $product->variations[0]->product_variation_stock->stock_qty : 0;
+                        @endphp
                         @if (!$isVariantProduct && $stock < 1)
                             <a href="javascript:void(0);" class="fs-xs fw-bold d-inline-block explore-btn">
                                 {{ localize('Out of Stock') }}
@@ -86,6 +93,11 @@
                     @endif
                 </div>
             </form>
+            @else
+               
+                <p>No variations available for this product.</p>
+            @endif
+
         @endif
 
     </div>
