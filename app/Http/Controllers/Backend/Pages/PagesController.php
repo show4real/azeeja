@@ -66,7 +66,7 @@ class PagesController extends Controller
     # edit page
      public function edit(Request $request, $id)
     {
-        $lang_key = $request->lang_key;
+        $lang_key = "en";
         // $language = Language::isActive()->where('code', $lang_key)->first();
         // if(!$language){ 
         //     flash(localize('Language you are trying to translate is not available or not active'))->error();
