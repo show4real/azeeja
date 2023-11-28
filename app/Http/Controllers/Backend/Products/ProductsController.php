@@ -285,12 +285,12 @@ class ProductsController extends Controller
         $location = Location::where('is_default', 1)->first();
         $request->session()->put('stock_location_id',  $location->id);
 
-        $lang_key = $request->lang_key;
-        $language = Language::where('is_active', 1)->where('code', $lang_key)->first();
-        if (!$language) {
-            flash(localize('Language you are trying to translate is not available or not active'))->error();
-            return redirect()->route('admin.products.index');
-        }
+        $lang_key = 'en';
+        // $language = Language::where('is_active', 1)->where('code', $lang_key)->first();
+        // if (!$language) {
+        //     flash(localize('Language you are trying to translate is not available or not active'))->error();
+        //     return redirect()->route('admin.products.index');
+        // }
         $product = Product::findOrFail($id);
         $categories = Category::where('parent_id', 0)
             ->orderBy('sorting_order_level', 'desc')
