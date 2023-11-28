@@ -62,12 +62,12 @@ class VariationsController extends Controller
     # edit variation
     public function edit(Request $request, $id)
     {
-        $lang_key = "en";
-        // $language = Language::where('is_active', 1)->where('code', $lang_key)->first();
-        // if (!$language) {
-        //     flash(localize('Language you are trying to translate is not available or not active'))->error();
-        //     return redirect()->route('admin.variations.index');
-        // }
+        $lang_key = $request->lang_key;
+        $language = Language::where('is_active', 1)->where('code', $lang_key)->first();
+        if (!$language) {
+            flash(localize('Language you are trying to translate is not available or not active'))->error();
+            return redirect()->route('admin.variations.index');
+        }
         $variation = Variation::findOrFail($id);
         return view('backend.pages.products.variations.edit', compact('variation', 'lang_key'));
     }
